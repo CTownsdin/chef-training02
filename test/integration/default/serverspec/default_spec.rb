@@ -6,4 +6,18 @@ describe 'apache::default' do
   it 'does something' do
     skip 'Replace this with meaningful tests'
   end
+
+
+  describe port(80) do
+    it { should be_listening }
+  end
+
+  describe command('ls /foo') do
+    its(:stderr) { should match /No such file or directory/ }
+  end
+
+  describe command('curl http://localhost') do
+    its(:stdout) { should contain /Hello, world!/ }
+  end
 end
+
